@@ -1,1 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilitating Distance Learning using Digital Conferencing Facility</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary: #EF5350;
+            --secondary: #FF7043;
+            --body: #F8F3F0;
+            --text: #1D1D1B;
+            --secondary-dark: #9C3A26;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--body);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+            max-width: 200px;
+            object-fit: contain;
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .project-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .meta-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .meta-item strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        main {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .section h3 {
+            color: var(--secondary-dark);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            margin-top: 0;
+        }
+
+        /* Lists */
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(239, 83, 80, 0.1);
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        li::before {
+            content: '▶';
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+            top: 0.75rem;
+            font-size: 0.8rem;
+        }
+
+        /* Activities Timeline */
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 4rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 22px;
+            top: 0.5rem;
+            width: 16px;
+            height: 16px;
+            background: var(--secondary);
+            border-radius: 50%;
+            border: 3px solid var(--white);
+            box-shadow: 0 0 0 3px var(--secondary);
+        }
+
+        .timeline-item h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat {
+            text-align: center;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--secondary-dark);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        /* SDGs */
+        .sdgs {
+            background: linear-gradient(135deg, rgba(239, 83, 80, 0.05), rgba(255, 112, 67, 0.05));
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+
+        .sdg-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .sdg-number {
+            background: var(--primary);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo-section {
+                gap: 1rem;
+            }
+            
+            .logo {
+                height: 50px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                padding-left: 3rem;
+            }
+
+            .timeline-item::before {
+                left: 12px;
+            }
+
+            .project-meta {
+                grid-template-columns: 1fr;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .logo-section {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .stat {
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .timeline-item {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="images/logos/tein-logo.png" alt="TEIN CC" class="logo">
+                    <img src="images/logos/asia-connect-logo.png" alt="Asia Connect" class="logo">
+                    <img src="images/logos/eu-logo.png" alt="European Union" class="logo">
+                </div>
+                <div class="hero-content">
+                    <h1>Facilitating Distance Learning using Digital Conferencing Facility</h1>
+                    <p>Empowering NRENs across South and Southeast Asia with digital conferencing capabilities to support distance education and collaborative research</p>
+                    
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <strong>Project Category</strong>
+                            WP5
+                        </div>
+                        <div class="meta-item">
+                            <strong>Call</strong>
+                            2nd Call
+                        </div>
+                        <div class="meta-item">
+                            <strong>Duration</strong>
+                            22 Months
+                        </div>
+                        <div class="meta-item">
+                            <strong>Countries</strong>
+                            6 Countries
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="section">
+                <h2>Project Overview</h2>
+                <p>This project was launched to empower NRENs across South and Southeast Asia with digital conferencing capabilities to support distance education and collaborative research. A Zoom-based platform was deployed on BdREN Cloud, accompanied by a service portal, multiple training programs, and a Train-the-Trainer model. The initiative spanned 22 months and proved pivotal during COVID-19, offering scalable and equitable digital learning services. The project supported institutional capacity building while bridging regional digital divides.</p>
+            </section>
+
+            <section class="section">
+                <h2>Partner Organizations</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Lead Partner</h3>
+                        <p><strong>Bangladesh Research and Education Network (BdREN)</strong> - Host of the digital conferencing platform and primary technical coordinator</p>
+                    </div>
+                    <div class="card">
+                        <h3>Technical Partner</h3>
+                        <p><strong>NORDUnet</strong> - Providing technical expertise and platform integration support</p>
+                    </div>
+                    <div class="card">
+                        <h3>Regional Partners</h3>
+                        <p><strong>LEARN (Sri Lanka), NREN (Nepal), PREGINET (Philippines), ThaiREN (Thailand), DrukREN (Bhutan)</strong> - National research and education networks</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Project Objectives</h2>
+                <div class="card">
+                    <h3>Primary Objective</h3>
+                    <p>To deploy a regional Zoom-based digital conferencing system supporting distance learning, research collaboration, and knowledge dissemination across NREN communities.</p>
+                </div>
+                
+                <h3>Sub-objectives</h3>
+                <ul>
+                    <li>Deploy Zoom platform within TEIN via BdREN Cloud (DCaaS)</li>
+                    <li>Train stakeholders via Train-the-Trainer modules</li>
+                    <li>Deliver structured DLE Courses and Seminars</li>
+                    <li>Increase digital engagement and TEIN network utilization</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Key Activities Timeline</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Kick-off Workshop (September 2018)</h4>
+                        <p>Bangkok - Initiated project planning and stakeholder engagement</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Zoom Installation at BdREN (March 2019)</h4>
+                        <p>Deployed hardware and configured the conferencing platform</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Train-the-Trainer Workshop I (April 2019)</h4>
+                        <p>Sri Lanka - Administrative training on Zoom platform</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>DLE Course 1 (July-August 2019)</h4>
+                        <p>Introduction to Cybersecurity with 120 participants</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Performance Evaluation Workshop (August 2019)</h4>
+                        <p>Dhaka - Reviewed platform usage and feedback</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>DLE Course 2 (September-October 2019)</h4>
+                        <p>Advanced Ethical Hacking course with 500 participants</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Train-the-Trainer Workshop II (December 2019)</h4>
+                        <p>Nepal - Technical training on IDP, Jagger, Satosa</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>DLE Course 3 (February-March 2020)</h4>
+                        <p>Practical Cryptography with 470 trainees</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>DLE Course 4 (April-May 2020)</h4>
+                        <p>Big Data and Hadoop with 577 participants</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>DigiNars (2019-2020)</h4>
+                        <p>Three seminars on NREN sustainability, Eduroam, and COVID-19 response</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Knowledge Sharing Event (October 2019)</h4>
+                        <p>Sweden - Final regional wrap-up and impact assessment</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Key Outcomes & Impact</h2>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number">2.5M+</span>
+                        <div class="stat-label">Total Participants</div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">4</span>
+                        <div class="stat-label">Online Courses</div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">2</span>
+                        <div class="stat-label">TTT Workshops</div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">3</span>
+                        <div class="stat-label">Regional DigiNars</div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">20K</span>
+                        <div class="stat-label">Zoom Licenses (Peak)</div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">6</span>
+                        <div class="stat-label">Partner Countries</div>
+                    </div>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Digital Platform Deployment</h3>
+                        <p>Zoom successfully installed and integrated as Digital Conferencing as a Service (DCaaS) in BdREN Cloud, providing scalable infrastructure for the region.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Capacity Building</h3>
+                        <p>Comprehensive training programs delivered through Train-the-Trainer workshops, ensuring sustainable local deployment and service maintenance capabilities.</p>
+                    </div>
+                    <div class="card">
+                        <h3>COVID-19 Response</h3>
+                        <p>Platform licensing scaled from 10,000 to 20,000 users to meet surging demand during the pandemic, demonstrating critical importance for continuity of education.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Challenges & Solutions</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Device Procurement Delays</h3>
+                        <p>Bhutan, Nepal, and the Philippines experienced late-stage hardware receipt, which was addressed through flexible scheduling and remote support mechanisms.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Participation Engagement</h3>
+                        <p>Limited engagement from some NRENs in early-stage DLEs was overcome through enhanced outreach and customized training approaches.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Technical Complexity</h3>
+                        <p>Satosa Proxy and SSO configuration required advanced technical support, leading to development of specialized training modules.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Future Directions</h2>
+                <ul>
+                    <li><strong>Expand DCaaS:</strong> Encourage other NRENs to adopt and host digital conferencing platforms</li>
+                    <li><strong>Support Identity Federations:</strong> Promote Eduroam and SSO across all beneficiary NRENs</li>
+                    <li><strong>Open Course Access:</strong> Archive DLE materials for future learners and wider accessibility</li>
+                    <li><strong>Strengthen Community Networks:</strong> Enhance regional forums and digital collaboration platforms</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Sustainable Development Goals</h2>
+                <div class="sdgs">
+                    <div class="sdg-item">
+                        <div class="sdg-number">4</div>
+                        <div>
+                            <strong>Quality Education</strong>
+                            <p>Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all</p>
+                        </div>
+                    </div>
+                    <div class="sdg-item">
+                        <div class="sdg-number">9</div>
+                        <div>
+                            <strong>Industry, Innovation and Infrastructure</strong>
+                            <p>Build resilient infrastructure, promote inclusive and sustainable industrialization and foster innovation</p>
+                        </div>
+                    </div>
+                    <div class="sdg-item">
+                        <div class="sdg-number">17</div>
+                        <div>
+                            <strong>Partnerships for the Goals</strong>
+                            <p>Strengthen the means of implementation and revitalize the global partnership for sustainable development</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 TEIN Cooperation Center | Asia Connect Program | European Union</p>
+            <p>Facilitating Distance Learning using Digital Conferencing Facility - WP5 Project</p>
+        </div>
+    </footer>
+</body>
+</html>
